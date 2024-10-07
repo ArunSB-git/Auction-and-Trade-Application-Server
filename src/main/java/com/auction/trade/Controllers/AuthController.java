@@ -69,7 +69,7 @@ public class AuthController {
 
     @GetMapping("/transactionHistory")
     @CrossOrigin(origins = "http://localhost:5173")
-    public List<TransactionHistory> getTransactions(){
+    public List<TransactionHistory> getTransactions() {
         return transactionService.getAllTransactions();
     }
 
