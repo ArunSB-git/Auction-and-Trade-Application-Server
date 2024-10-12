@@ -1,6 +1,8 @@
 package com.auction.trade.Controllers;
 
 
+import com.auction.trade.LoginRequest;
+import com.auction.trade.LoginResponse;
 import com.auction.trade.Models.*;
 import com.auction.trade.Service.AuthService;
 import com.auction.trade.ErrorResponse;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -27,9 +30,15 @@ public class AuthController {
     TransactionService transactionService;
 
     @PostMapping("/auth")
-    @CrossOrigin(origins = "http://localhost:5173")
-    public void login() {
+    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        Optional<LoginResponse> loginResponse = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
 
+        if (loginResponse.isPresent()) {
+            return ResponseEntity.ok(loginResponse.get());
+        } else {
+            return ResponseEntity.status(401).body("Invalid username or password");
+        }
     }
 
     @GetMapping("/listOfUsers")
