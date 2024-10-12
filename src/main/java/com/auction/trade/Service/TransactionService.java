@@ -51,14 +51,27 @@ public class TransactionService {
         transaction.setStatus(status);
         Transactions updatedTransaction = transactionRepository.save(transaction);
 
-        // If approved, update the player status
+        // If approved, reject all other transactions for the same player
         if ("approved".equalsIgnoreCase(status)) {
+            // Fetch all transactions for the player
+            List<Transactions> playerTransactions = transactionRepository.findAllByPlayerid(transaction.getPlayerid());
+
+            for (Transactions trans : playerTransactions) {
+                if (trans.getTransactionid() != transaction.getTransactionid()) { // Direct comparison of int
+                    trans.setStatus("rejected");
+                    transactionRepository.save(trans); // Save the rejected transactions
+                }
+            }
+
+
+            // Update the player status to sold
             player.setStatus("sold");
-            playerService.updatePlayer(player); // Assuming you have an update method in PlayerService
+            playerService.updatePlayer(player);
         }
 
         return updatedTransaction;
     }
+
 
 
     public List<TransactionHistory> getAllTransactions() {
