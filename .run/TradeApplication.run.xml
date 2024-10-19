@@ -1,0 +1,20 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="TradeApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+    <envs>
+      <env name="PASSWORD" value="VuTqLgGl5kKgJcazUtQ6C6iYduGLz3g1" />
+      <env name="URL" value="jdbc:postgresql://dpg-cs9r21i3esus739kmjhg-a.singapore-postgres.render.com:5432/auction_vzq3" />
+      <env name="USERNAME" value="postgresql" />
+    </envs>
+    <option name="MAIN_CLASS_NAME" value="com.auction.trade.TradeApplication" />
+    <module name="trade" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.auction.trade.DTO.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
