@@ -30,7 +30,7 @@ public class AuthController {
     TransactionService transactionService;
 
     @PostMapping("/auth")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+    @CrossOrigin(origins = {"http://localhost:5173","https://auction-and-trade-application-client.onrender.com/"}, allowCredentials = "true")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         Optional<LoginResponse> loginResponse = authService.login(loginRequest.getUsername(), loginRequest.getPassword());
 
@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @GetMapping("/listOfUsers")
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = {"http://localhost:5173","https://auction-and-trade-application-client.onrender.com/"}, allowCredentials = "true")
     public List<Users> getUsers(@RequestParam(required = false) String role) {
 
         if (role != null && !role.isEmpty()) {
@@ -54,7 +54,7 @@ public class AuthController {
     }
 
     @GetMapping("/listOfPlayers")
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = {"http://localhost:5173","https://auction-and-trade-application-client.onrender.com/"}, allowCredentials = "true")
     public List<Players> getPlayers(@RequestParam(required = false) String nationality, @RequestParam(required = false, defaultValue = "desc") String sort) {
 
 
@@ -66,7 +66,7 @@ public class AuthController {
     }
 
     @PostMapping("/createBid")
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = {"http://localhost:5173","https://auction-and-trade-application-client.onrender.com/"}, allowCredentials = "true")
     public ResponseEntity<?> bidPlayer(@RequestBody Transactions transactions) {
         try {
             Transactions createdPlayer = transactionService.createTransaction(transactions);
@@ -77,13 +77,13 @@ public class AuthController {
     }
 
     @GetMapping("/transactionHistory")
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = {"http://localhost:5173","https://auction-and-trade-application-client.onrender.com/"}, allowCredentials = "true")
     public List<TransactionHistory> getTransactions() {
         return transactionService.getAllTransactions();
     }
 
     @PostMapping("/updateTransactionStatus")
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = {"http://localhost:5173","https://auction-and-trade-application-client.onrender.com/"}, allowCredentials = "true")
     public ResponseEntity<?> updateTransactionStatus(@RequestBody TransactionStatusUpdateRequest request) {
         try {
             Transactions updatedTransaction = transactionService.updateTransactionStatus(request);
