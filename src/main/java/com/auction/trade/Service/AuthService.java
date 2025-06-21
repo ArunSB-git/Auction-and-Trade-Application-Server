@@ -30,6 +30,7 @@ public class AuthService {
 //        return authRepository.findByNationality(nationality);
 //    }
 
+
     public Optional<LoginResponse> login(String username, String password) {
         Optional<Users> user = authRepository.findByUsername(username);
         if (user.isPresent() && user.get().getPassword().equals(password)) {
